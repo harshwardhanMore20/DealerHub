@@ -1,0 +1,37 @@
+{% extends 'dealers/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="{{ dealer.image }}" class="img-fluid rounded shadow" alt="{{ dealer.name }}">
+    </div>
+    <div class="col-md-7">
+      <h2>{{ dealer.name }}</h2>
+      <p><strong>State:</strong> {{ dealer.state }}</p>
+      <p><strong>City:</strong> {{ dealer.city }}</p>
+      <p><strong>Address:</strong> {{ dealer.address }}</p>
+      <p><strong>Phone:</strong> {{ dealer.phone }}</p>
+      <p><strong>Email:</strong> {{ dealer.email }}</p>
+      <p><strong>Average Rating:</strong> {{ avg_rating|floatformat:1 }}/5</p>
+      {% if user.is_authenticated %}
+      <a href="{% url 'post_review' dealer.pk %}" class="btn btn-success">Review Dealer</a>
+      {% else %}
+      <a href="{% url 'login' %}" class="btn btn-outline-primary">Login to Review</a>
+      {% endif %}
+    </div>
+  </div>
+  <hr class="my-4">
+  <h3>Customer Reviews</h3>
+  {% for review in reviews %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h6>{{ review.user.username }} • {{ review.rating }}/5</h6>
+      <p>{{ review.comment }}</p>
+      <small class="text-muted">{{ review.created_at }}</small>
+    </div>
+  </div>
+  {% empty %}
+  <p>No reviews yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

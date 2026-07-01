@@ -1,0 +1,22 @@
+{% extends 'dealers/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-4">About Us</h1>
+  <p class="lead">We connect customers with reliable dealerships and make every experience transparent.</p>
+  <div class="row">
+    {% for person in team %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <img src="{{ person.image }}" class="card-img-top" alt="{{ person.name }}">
+        <div class="card-body">
+          <h5>{{ person.name }}</h5>
+          <h6 class="text-primary">{{ person.role }}</h6>
+          <p>{{ person.details }}</p>
+          <a href="mailto:{{ person.email }}">{{ person.email }}</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'dealers/base.html' %}
+{% block content %}
+<div class="container py-5" style="max-width: 700px;">
+  <h2>Sign Up</h2>
+  {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label">Username</label><input class="form-control" name="username" required></div>
+      <div class="col-md-6"><label class="form-label">First Name</label><input class="form-control" name="first_name"></div>
+      <div class="col-md-6"><label class="form-label">Last Name</label><input class="form-control" name="last_name"></div>
+      <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email" name="email" required></div>
+      <div class="col-12"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required></div>
+    </div>
+    <button class="btn btn-primary mt-3">Register</button>
+  </form>
+</div>
+{% endblock %}

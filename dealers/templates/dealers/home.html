@@ -1,0 +1,37 @@
+{% extends 'dealers/base.html' %}
+{% block content %}
+<div class="hero">
+  <div class="container">
+    <h1>Find trusted dealers near you</h1>
+    <p>Browse dealer profiles, filter by state, and read verified reviews.</p>
+    <form class="row g-2" method="get">
+      <div class="col-md-8">
+        <input class="form-control" name="state" placeholder="Filter by state" value="{{ state|default:'' }}">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-light w-100">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="container py-4">
+  <div class="row">
+    {% for dealer in dealers %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ dealer.image }}" class="card-img-top" alt="{{ dealer.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ dealer.name }}</h5>
+          <p class="card-text mb-1"><strong>State:</strong> {{ dealer.state }}</p>
+          <p class="card-text mb-1"><strong>City:</strong> {{ dealer.city }}</p>
+          <p class="card-text mb-1"><strong>Phone:</strong> {{ dealer.phone }}</p>
+          <a href="{% url 'dealer_detail' dealer.pk %}" class="btn btn-primary mt-3">View Dealer</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12"><div class="alert alert-info">No dealers found.</div></div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
